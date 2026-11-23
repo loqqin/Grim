@@ -115,8 +115,12 @@ public class CorrectingPlayerInventoryStorage extends InventoryStorage {
             ItemStack serverside = player.platformPlayer.getInventory().getStack(bukkitSlot, slot);
 
             if (existing.getType() != serverside.getType() || existing.getAmount() != serverside.getAmount()) {
-                GrimAPI.INSTANCE.getScheduler().getEntityScheduler().execute(player.platformPlayer, GrimAPI.INSTANCE.getGrimPlugin(),
-                        () -> player.platformPlayer.updateInventory(), null, 0);
+                // Plugins that rewrite outgoing items (other type in the packet than in Bukkit) disable this through
+                // the InventoryResync feature, otherwise every check resends the whole inventory and clears the creative cursor
+                if (player.isInventoryResync()) {
+                    GrimAPI.INSTANCE.getScheduler().getEntityScheduler().execute(player.platformPlayer, GrimAPI.INSTANCE.getGrimPlugin(),
+                            () -> player.platformPlayer.updateInventory(), null, 0);
+                }
                 setItem(slot, serverside);
             }
         }

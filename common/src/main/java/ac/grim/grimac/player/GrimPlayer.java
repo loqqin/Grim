@@ -269,6 +269,8 @@ public class GrimPlayer implements GrimUser {
     @Getter @Setter private boolean exemptElytra;
     @Getter @Setter private boolean forceStuckSpeed = true;
     @Getter @Setter private boolean forceSlowMovement = true;
+    // Resend the inventory with updateInventory() when Grim sees a desync with Bukkit (InventoryResync feature)
+    @Getter @Setter private boolean inventoryResync = true;
     @Getter private boolean resetItemUsageOnAttack;
     @Getter private boolean resetItemUsageOnItemUpdate;
     @Getter private boolean resetItemUsageOnSlotChange;

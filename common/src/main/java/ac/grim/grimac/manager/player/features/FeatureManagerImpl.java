@@ -37,6 +37,7 @@ public class FeatureManagerImpl implements FeatureManager, ConfigReloadObserver 
         builder.register(new ExemptElytraFeature());
         builder.register(new ForceStuckSpeedFeature());
         builder.register(new ForceSlowMovementFeature());
+        builder.register(new InventoryResyncFeature());
         FEATURES = builder.buildMap();
     }
 
